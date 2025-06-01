@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Rate Tracker</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        table { border-collapse: collapse; width: 60%; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Currency Rate Tracker</h1>
+    <p>Base: {{ rates['base'] }}</p>
+    <table>
+        <tr>
+            <th>Currency</th>
+            <th>Rate</th>
+        </tr>
+        {% for currency, rate in rates['rates'].items() %}
+            <tr>
+                <td>{{ currency }}</td>
+                <td>{{ rate }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

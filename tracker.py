@@ -5,19 +5,25 @@ def get_currency_rates():
     response = requests.get(url)
     data = response.json()
 
-    print("Full API response:")
-    print(data)
-
-    print("\nParsed Output:\n")
-    print("💱 Currency Rates (Base: USD)\n")
-
     if 'rates' in data:
         rates = data['rates']
-        for currency in ['EUR', 'GBP', 'TRY', 'JPY', 'BTC']:
-            rate = rates.get(currency, "No data")
-            print(f"1 USD = {rate} {currency}")
+        selected_currencies = ['EUR', 'GBP', 'TRY', 'JPY', 'BTC']
+        filtered_rates = {currency: rates.get(currency, "No data") for currency in selected_currencies}
+        return {
+            "base": data.get("base_code", "USD"),
+            "rates": filtered_rates
+        }
     else:
-        print("Error fetching data:", data.get('error'))
+        return {
+            "base": "USD",
+            "rates": {},
+            "error": data.get('error', 'Unknown error')
+        }
 
 if __name__ == "__main__":
-    get_currency_rates()
+    result = get_currency_rates()
+
+    print("💱 Currency Rates (Base: {})\n".format(result["base"]))
+
+    for currency, rate in result["rates"].items():
+        print(f"1 {result['base']} = {rate} {currency}")
