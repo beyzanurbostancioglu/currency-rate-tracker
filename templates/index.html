@@ -1,29 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Currency Rate Tracker</title>
     <meta charset="UTF-8">
+    <title>Currency Rate Tracker</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        table { border-collapse: collapse; width: 60%; }
-        th, td { border: 1px solid #ddd; padding: 8px; }
-        th { background-color: #f2f2f2; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 1rem;
+        }
+        input[type="text"] {
+            padding: 0.5rem;
+            width: 200px;
+        }
+        input[type="submit"] {
+            padding: 0.5rem 1rem;
+        }
+        .rate {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .timestamp {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
-    <h1>Currency Rate Tracker</h1>
-    <p>Base: {{ rates['base'] }}</p>
-    <table>
-        <tr>
-            <th>Currency</th>
-            <th>Rate</th>
-        </tr>
-        {% for currency, rate in rates['rates'].items() %}
-            <tr>
-                <td>{{ currency }}</td>
-                <td>{{ rate }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-</body>
-</html>
+    <h1>💱 Currency Rate Tracker</h1>
+
+    <form method="post">
+        <label for="currency_code">Currency Code (e.g., EUR, GBP):</label><br>
+        <input type="text" name="currency_code" id="currency_code" value="{{ query }}">
+        <input type="submit" value="Get Rate">
+    </form>
+
+    <!-- ...diğer kısımlar aynı kalsın... -->
+
+<div class="rate">
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% else %}
+        <ul>
+            {% for code, rate in rates.items() %}
+                <li>1 USD = {{ rate }} {{ code }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
