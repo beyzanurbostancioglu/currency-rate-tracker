@@ -15,32 +15,39 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
             background: white;
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
         th, td {
-            padding: 0.5rem;
-            border: 1px solid #ddd;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
             text-align: left;
         }
         th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
             background-color: #f9f9f9;
         }
         .timestamp {
             margin-top: 1rem;
-            color: #555;
             font-size: 0.9rem;
+            color: #666;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
         }
     </style>
 </head>
 <body>
-    <h1>💱 All Currency Rates (Base: USD)</h1>
+    <h1>🌐 All Currency Exchange Rates (Base: USD)</h1>
 
     <table>
         <thead>
             <tr>
-                <th>Currency Code</th>
+                <th>Currency</th>
                 <th>Rate</th>
             </tr>
         </thead>
@@ -57,6 +64,8 @@
     <div class="timestamp">
         Last updated: {{ last_update }}
     </div>
+
+    <br>
+    <a href="/">⬅ Back to Home</a>
 </body>
 </html>
-
