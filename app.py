@@ -12,6 +12,11 @@ def get_currency_rates():
         return data['rates'], data.get("time_last_update_utc", "Unknown")
     else:
         return {}, "Error"
+@app.route("/all")
+def all_rates():
+    rates, last_update = get_currency_rates()
+    return render_template("all_rates.html", rates=rates, last_update=last_update)
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
